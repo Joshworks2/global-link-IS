@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GLOBAL LINK | SkillSync</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <nav style="text-align:center; padding: 10px; background-color: #ccc;">
+  <a href="home page.html" style="margin: 0 15px;">Home</a>
+  <a href="login.html" style="margin: 0 15px;">Login</a>
+  <a href="dashboard.html" style="margin: 0 15px;">Dashboard</a>
+  <a href="jobs.html" style="margin: 0 15px;">Jobs</a>
+  <a href="application history.html" style="margin: 0 15px;">Application History</a>
+  <a href="my profile.html" style="margin: 0 15px;">My Profile</a>
+</nav>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f2f2f2;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #2e2e2e;
+      padding: 1rem 2rem;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffb347;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1581093588401-23f9faebc37e?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+      padding: 6rem 2rem;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-button {
+      background-color: #ffb347;
+      color: #2e2e2e;
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #e6a034;
+    }
+
+    section {
+      padding: 4rem 2rem;
+    }
+
+    .features, .how-it-works {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      background-color: #ffffff;
+    }
+
+    .card {
+      background-color: #f1f1f1;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      width: 300px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .card p, .card ul {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .register-options {
+      text-align: center;
+      background-color: #ccc;
+    }
+
+    .register-options a {
+      padding: 14px 30px;
+      background-color: #666;
+      color: white;
+      text-decoration: none;
+      margin: 10px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    .register-options a:hover {
+      background-color: #555;
+    }
+
+    footer {
+      background-color: #2e2e2e;
+      color: #ccc;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #bbb;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav class="navbar">
+      <h1 class="logo">GLOBAL LINK</h1>
+      <ul class="nav-links">
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Prove Your Skill, Not Just Your Grades</h1>
+      <p>Connect your talent to real opportunities. Upload, showcase, and get hired!</p>
+      <a href="register.html" class="cta-button">Get Started</a>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works">
+    <div class="card">
+      <h3>For Employers</h3>
+      <ul>
+        <li>Post a job</li>
+        <li>Review candidates' videos</li>
+        <li>Hire based on skill</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>For Job Seekers</h3>
+      <ul>
+        <li>Browse job listings</li>
+        <li>Upload skill demos</li>
+        <li>Track your applications</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="card">
+      <h3>🎥 Upload Skills</h3>
+      <p>Show what you can do with short, real-world video clips.</p>
+    </div>
+    <div class="card">
+      <h3>👤 Build Profile</h3>
+      <p>Create a powerful profile employers will love to explore.</p>
+    </div>
+    <div class="card">
+      <h3>🤝 Get Hired</h3>
+      <p>Connect directly with companies looking for real skills.</p>
+    </div>
+  </section>
+
+  <!-- REGISTER OPTIONS -->
+  <section class="register-options">
+    <h2>Ready to Get Started?</h2>
+    <p>Choose your path below</p>
+    <a href="register-seeker.html">Register as Job Seeker</a>
+    <a href="register-employer.html">Register as Employer</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 SkillSync / GLOBAL LINK. All rights reserved.</p>
+    <p>Contact us at <a href="mailto:info@skillsync.co.ke">info@skillsync.co.ke</a></p>
+  </footer>
+
+</body>
+</html>
