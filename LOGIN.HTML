@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GLOBALLINK - Login</title>
+  <title>GLOBAL-LINK - Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -14,55 +14,29 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #f9f9f9;
+      background-color: #f2f2f2;
       color: #333;
     }
 
-    header {
-      background-color: #2e2e2e;
-      padding: 1rem 2rem;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      color: #fff;
-      font-size: 1.8rem;
-      font-weight: 600;
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .nav-links li a {
-      text-decoration: none;
-      color: #fff;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links li a:hover {
-      color: #ffb347;
+    .header {
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+      text-align: center;
     }
 
     .login-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 80vh;
+      flex-direction: column;
+      min-height: 90vh;
       padding: 2rem;
     }
 
     #loginForm {
       background-color: #fff;
-      padding: 3rem 2rem;
+      padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       width: 100%;
@@ -87,39 +61,65 @@
     #loginForm button {
       width: 100%;
       padding: 0.9rem;
-      background-color: #ffb347;
+      background-color: #333;
       border: none;
       border-radius: 6px;
       font-weight: bold;
       font-size: 1rem;
-      color: #2e2e2e;
+      color: #fff;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
 
     #loginForm button:hover {
-      background-color: #e6a034;
+      background-color: #555;
     }
 
-    footer {
-      background-color: #2e2e2e;
-      color: #fff;
+    .register-links {
+      margin-top: 1.5rem;
       text-align: center;
-      padding: 1rem 0;
-      font-size: 0.9rem;
+    }
+
+    .register-links p {
+      margin-bottom: 0.5rem;
+    }
+
+    .register-links a {
+      display: inline-block;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .register-links a:hover {
+      text-decoration: underline;
+    }
+
+    .back-home {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .back-home a button {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .back-home a button:hover {
+      background-color: #555;
     }
   </style>
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <h1 class="logo">GLOBAL-LINK</h1>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="register.html">Register</a></li>
-      </ul>
-    </nav>
-  </header>
+    <div class="header">
+    <h2>GLOBAL-LINK</h2>
+  </div>
 
   <main class="login-container">
     <form id="loginForm">
@@ -127,13 +127,13 @@
       <input type="text" placeholder="Username" id="username" required>
       <input type="password" placeholder="Password" id="password" required>
       <button type="submit">Login</button>
+
+      <div class="register-links">
+        <p>Don't have an account?</p>
+        <a href="register-employer.html">Register as Employer</a>
+        <a href="REGISTER-JOBSEEKER.HTML">Register as Job Seeker</a>
+      </div>
     </form>
-  </main>
 
-  <footer>
-    <p>&copy; 2025 SkillsMatch. All rights reserved.</p>
-  </footer>
-
-  <script src="js/auth.js"></script>
-</body>
-</html>
+    <div class="back-home">
+      <a href="home page.html"><button>Back to Home</button

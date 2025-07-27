@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employer Registration</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      text-align: center;
+    }
+
+    .header {
+      background-color: #333;
+      padding: 15px;
+      color: white;
+    }
+
+    .nav-links {
+      margin-top: 10px;
+    }
+
+    .nav-links a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .form-container {
+      background-color: white;
+      width: 90%;
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      background-color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h2>GLOBAL-LINK</h2>
+    <div class="nav-links">
+      <a href="LOGIN.html">Login</a>
+      <a href="REGISTER-JOBSEEKER.HTML">Register as job-seeker</a>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <h3>Employer Registration</h3>
+    <form>
+      <label>Company Name:
+        <input type="text" placeholder="ABC Corporation" required>
+      </label>
+      
+      <label>Industry:
+        <input type="text" placeholder="e.g. IT, Healthcare, Finance" required>
+      </label>
+
+      <label>Contact Person:
+        <input type="text" placeholder="Jane Smith" required>
+      </label>
+
+      <label>Email:
+        <input type="email" placeholder="hr@company.com" required>
+      </label>
+
+      <label>Password:
+        <input type="password" required>
+      </label>
+
+      <label>Confirm Password:
+        <input type="password" required>
+      </label>
+
+      <label>Upload Company Logo:
+        <input type="file" accept=".jpg,.jpeg,.png,.svg">
+      </label>
+
+      <button type="submit">Register</button>
+      <button type="reset">Reset</button>
+    </form>
+
+    <button class="back-btn" onclick="window.location.href='HOME PAGE.html'">← Back to Home</button>
+  </div>
+
+</body>
+</html>

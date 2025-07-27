@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -14,8 +14,39 @@
     .header {
       background-color: #333;
       color: white;
-      padding: 15px;
-      text-align: center;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .header .title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .header .header-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .header .header-buttons a {
+      text-decoration: none;
+    }
+
+    .header .header-buttons button {
+      background-color: #555;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .header .header-buttons button:hover {
+      background-color: #777;
     }
 
     .job-card {
@@ -65,7 +96,10 @@
 <body>
 
   <div class="header">
-    <h2>GLOBAL-LINK</h2>
+    <div class="title">GLOBAL-LINK</div>
+    <div class="header-buttons">
+      <a href="JOB-SEEKER DASHBOARD.HTML"><button>HOME</button></a>
+    </div>
   </div>
 
   <main style="padding: 2rem; min-height: 100vh;">
@@ -130,13 +164,6 @@
       <h3>🔧 UI/UX Tester</h3>
       <p><strong>Skills:</strong> Attention to Detail, Bug Reporting</p>
       <button>Apply Now</button>
-    </div>
-
-    <!-- Back to Home Button -->
-    <div class="back-home">
-      <a href="home page.html">
-        <button>Back to Home</button>
-      </a>
     </div>
 
   </main>
