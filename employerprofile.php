@@ -105,7 +105,7 @@
   <nav class="navbar">
     <div class="logo">GLOBAL-LINK</div>
     <ul class="nav-links">
-      <li><a href="EMPLOYER DASHBOARD.html">Home</a></li>
+      <li><a href="employerdashboard.php">Home</a></li>
     </ul>
   </nav>
 
@@ -115,7 +115,7 @@
       <p><strong>Name:</strong> Company Name</p>
       <p><strong>Email:</strong> employer@example.com</p>
       <p><strong>About:</strong> We are a leading company in the tech industry...</p>
-      <a href="PROFILE.HTML"><button>Edit Profile</button></a>
+      <a href="profile.php"><button>Edit Profile</button></a>
     </div>
   </div>
 

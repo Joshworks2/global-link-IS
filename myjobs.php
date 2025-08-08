@@ -98,7 +98,7 @@
   <div class="header">
     <div class="title">GLOBAL-LINK</div>
     <div class="header-buttons">
-      <a href="JOB-SEEKER DASHBOARD.HTML"><button>HOME</button></a>
+      <a href="jobseekerdashboard.php"><button>HOME</button></a>
     </div>
   </div>
 
@@ -109,61 +109,61 @@
     <div class="job-card">
       <h3>🖥️ Front-End Web Developer</h3>
       <p><strong>Skills:</strong> HTML, CSS, JavaScript</p>
-      <a href="APPLY.HTML"><button>Apply Now</button>
+      <a href="apply.php"><button>Apply Now</button>
     </div>
 
     <div class="job-card">
       <h3>🎨 Graphic Designer Needed</h3>
       <p><strong>Skills:</strong> Adobe Photoshop, Portfolio</p>
-      <a href="APPLY.HTML"><button>Apply Now</button>
+      <a href="apply.php"><button>Apply Now</button>
     </div>
 
     <div class="job-card">
       <h3>📲 Mobile App Developer</h3>
       <p><strong>Skills:</strong> Flutter, Firebase, UX Design</p>
-      <a href="APPLY.HTML"><button>Apply Now</button>
+      <a href="apply.php"><button>Apply Now</button>
     </div>
 
     <div class="job-card">
       <h3>📝 Content Writer</h3>
       <p><strong>Skills:</strong> SEO, Copywriting, Research</p>
-      <a href="APPLY.HTML"><button>Apply Now</button>
+      <a href="apply.php"><button>Apply Now</button>
     </div>
 
     <div class="job-card">
       <h3>📷 Social Media Manager</h3>
       <p><strong>Skills:</strong> Instagram, Analytics, Branding</p>
-      <a href="APPLY.HTML"><button>Apply Now</button>
+      <a href="apply.php"><button>Apply Now</button>
     </div>
 
     <div class="job-card">
       <h3>🎬 Video Editor</h3>
       <p><strong>Skills:</strong> Premiere Pro, Timing, Visuals</p>
-      <a href="APPLY.HTML"><button>Apply Now</button>
+      <a href="aplly.php"><button>Apply Now</button>
     </div>
 
     <div class="job-card">
       <h3>📦 Logistics Coordinator</h3>
       <p><strong>Skills:</strong> Inventory, Communication, Fast Typing</p>
-      <a href="APPLY.HTML"><button>Apply Now</button>
+      <a href="apply.php"><button>Apply Now</button>
     </div>
 
     <div class="job-card">
       <h3>👨‍💼 Virtual Assistant</h3>
       <p><strong>Skills:</strong> Calendar Management, Email Handling</p>
-      <a href="APPLY.HTML"><button>Apply Now</button>
+      <a href="apply.php"><button>Apply Now</button>
     </div>
 
     <div class="job-card">
       <h3>🛒 E-commerce Product Uploader</h3>
       <p><strong>Skills:</strong> Excel, Shopify, Basic Image Editing</p>
-      <a href="APPLY.HTML"><button>Apply Now</button>
+      <a href="apply.php"><button>Apply Now</button>
     </div>
 
     <div class="job-card">
       <h3>🔧 UI/UX Tester</h3>
       <p><strong>Skills:</strong> Attention to Detail, Bug Reporting</p>
-      <a href="APPLY.HTML"><button>Apply Now</button>
+      <a href="apply.php"><button>Apply Now</button>
     </div>
 
   </main>

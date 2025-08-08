@@ -1,3 +1,5 @@
+<?php include 'db_connect.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,8 +123,8 @@
     <nav class="navbar">
       <h1 class="logo">GLOBAL-LINK</h1>
       <ul class="nav-links">
-        <li><a href="HOME PAGE.HTML">Home</a></li>
-        <li><a href="LOGIN.HTML">Logout</a></li>
+        <li><a href="homepage.php">Home</a></li>
+        <li><a href="login.php">Logout</a></li>
       </ul>
     </nav>
   </header>
@@ -130,19 +132,19 @@
   <main class="dashboard">
     <h2>Welcome,</h2>
     <div class="dashboard-links">
-      <a href="POST JOB.html" class="dashboard-card">
+      <a href="postjob.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/briefcase--v1.png" alt="Post Job">
         <h3>Post Job</h3>
       </a>
-      <a href="APPLICATIONS.html" class="dashboard-card">
+      <a href="applications.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/50/resume.png" class="icon" alt="View Applicants">
         <h3>View Applicantions</h3>
       </a>
-      <a href="JOB LIST.html" class="dashboard-card">
+      <a href="joblist.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/document.png" alt="Listings">
         <h3>My Job Listings</h3>
       </a>
-      <a href="EMPLOYER PROFILE.html" class="dashboard-card">
+      <a href="employerprofile.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/user.png" alt="Profile">
         <h3>My Profile</h3>
       </a>

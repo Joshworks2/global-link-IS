@@ -83,7 +83,7 @@
     <nav class="navbar">
       <h1 class="logo">GLOBAL-LINK</h1>
       <ul class="nav-links">
-        <li><a href="EMPLOYER DASHBOARD.html">Home</a></li>
+        <li><a href="employerdashboard.php">Home</a></li>
       </ul>
     </nav>
   </header>

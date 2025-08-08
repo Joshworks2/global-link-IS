@@ -1,3 +1,5 @@
+<?php include 'db_connect.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,8 +121,8 @@
     <nav class="navbar">
       <h1 class="logo">GLOBAL-LINK</h1>
       <ul class="nav-links">
-        <li><a href="HOME PAGE.HTML">Home</a></li>
-        <li><a href="LOGIN.HTML">Logout</a></li>
+        <li><a href="homepage.php">Home</a></li>
+        <li><a href="login.php">Logout</a></li>
       </ul>
     </nav>
   </header>
@@ -128,15 +130,15 @@
   <main class="dashboard">
     <h2>Welcome!</h2>
     <div class="dashboard-links">
-      <a href="APPICATION HISTORY.HTML" class="dashboard-card">
+      <a href="applicationhistory.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/upload.png" alt="Upload">
         <h3>application History</h3>
       </a>
-      <a href="MY JOBS.HTML" class="dashboard-card">
+      <a href="myjobs.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/suitcase.png" alt="Jobs">
         <h3>Browse Jobs</h3>
       </a>
-      <a href="MY PROFILE.HTML" class="dashboard-card">
+      <a href="myprofile.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/user.png" alt="Profile">
         <h3>Edit Profile</h3>
       </a>

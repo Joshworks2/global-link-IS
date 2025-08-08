@@ -1,3 +1,5 @@
+<?php include 'db_connect.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,10 +121,10 @@
     <nav class="navbar">
       <h1 class="logo">GLOBAL-LINK</h1>
       <ul class="nav-links">
-        <li><a href="login.html">Login</a></li>
-        <li><a href="REGISTER-EMPLOYER.html">Employer Register</a></li>
-        <li><a href="REGISTER-JOBSEEKER.html">Job Seeker Register</a></li>
-        <li><a href="JOBS.html">JOBS</a></li>
+        <li><a href="login.php">Login</a></li>
+        <li><a href="registeremployer.php">Employer Register</a></li>
+        <li><a href="registerjobseeker.php">Job Seeker Register</a></li>
+        <li><a href="jobs.php">JOBS</a></li>
       </ul>
     </nav>
   </header>
@@ -130,19 +132,19 @@
   <main class="dashboard">
     <h2>Welcome to GLOBAL-LINK</h2>
     <div class="dashboard-links">
-      <a href="REGISTER-EMPLOYER.html" class="dashboard-card">
+      <a href="registeremployer.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/business.png" alt="Employer Icon">
         <h3>Register as Employer</h3>
       </a>
-      <a href="REGISTER-JOBSEEKER.HTML" class="dashboard-card">
+      <a href="registerjobseeker.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/worker-male.png" alt="Jobseeker Icon">
         <h3>Register as Job Seeker</h3>
       </a>
-      <a href="JOBS.HTML" class="dashboard-card">
+      <a href="jobs.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/suitcase.png" alt="Jobs Icon">
         <h3>Browse Jobs</h3>
       </a>
-      <a href="LOGIN.HTML" class="dashboard-card">
+      <a href="login.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/lock-2.png" alt="Login Icon">
         <h3>Login</h3>
       </a>

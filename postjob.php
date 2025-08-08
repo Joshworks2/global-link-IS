@@ -1,3 +1,41 @@
+
+<?php
+session_start();
+require 'db_connect.php';
+
+$user_id = $_SESSION['user_id']; // Logged in user ID
+
+// 1. First, find the employer ID linked to this user
+$empQuery = $conn->prepare("SELECT id FROM employers WHERE user_id = ?");
+$empQuery->bind_param("i", $user_id);
+$empQuery->execute();
+$empResult = $empQuery->get_result();
+
+// 2. Now insert the job
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $title = $_POST['title'];
+    $requirements = $_POST['requirements'];
+    $location = $_POST['location'];
+
+    $stmt = $conn->prepare("INSERT INTO job_posts (employer_id, title, description, requirements, location) VALUES (?, ?, ?, ?, ?)");
+
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    $stmt->bind_param("issss", $employer_id, $title, $description, $requirements, $location);
+
+    if ($stmt->execute()) {
+        echo "Job posted successfully!";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,27 +155,29 @@
   </div>
 
   <div class="container">
-    <form class="job-form">
-      <h3>Post a New Job</h3>
+    <form class="job-form" method="POST" action="postjob.php">
+       <h3>Post a New Job</h3>
 
-      <label>Job Title:
-        <input type="text">
-      </label>
+       <label>Job Title:
+       <input type="text" name="title">
+       </label>
 
-      <label>Description:
-        <textarea rows="5"></textarea>
-      </label>
+       <label>Requirements:
+       <textarea name="requirements" required></textarea>
+       </label>
 
-      <label>Location:
-        <input type="text">
-      </label>
+       <label>Location:
+        <input type="text" name="location">
+       </label>
 
-      <button type="submit">Post Job</button>
-      <button type="reset">Reset</button>
+
+
+       <button type="submit">Post Job</button>
+       <button type="reset">Reset</button>
     </form>
 
     <div class="back-home">
-      <a href="EMPLOYER DASHBOARD.html"><button>← Back to Home</button></a>
+      <a href="employerdashboard.php"><button>← Back to Home</button></a>
     </div>
   </div>
 

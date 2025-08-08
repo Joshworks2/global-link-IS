@@ -105,7 +105,7 @@
   <div class="header">
     <h2>GLOBAL-LINK</h2>
     <div class="nav-links">
-      <a href="MY JOBS.HTML">← Back</a>
+      <a href="myjobs.php">← Back</a>
     </div>
   </div>
 

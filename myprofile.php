@@ -90,7 +90,7 @@
 
   <div class="header">
     <h1>GLOBAL LINK</h1>
-    <a href="JOB-SEEKER DASHBOARD.HTML"><button>HOME</button></a>
+    <a href="jobseekerdashboard.php"><button>HOME</button></a>
   </div>
 
   <div class="container">

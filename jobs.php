@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Available Jobs</title>
+  <title>Browse Jobs</title>
   <style>
     body {
       margin: 0;
@@ -69,13 +69,13 @@
   </div>
 
   <main style="padding: 2rem; min-height: 100vh;">
-    <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 2.5rem;">Available Jobs</h2>
+    <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 2.5rem;">Browse Jobs</h2>
 
     <!-- Sample Job Cards -->
     <div class="job-card">
       <h3>🖥️ Front-End Web Developer</h3>
       <p><strong>Skills:</strong> HTML, CSS, JavaScript</p>
-      <button>Apply Now</button>
+      <a href="LOGIN.HTML"><button>Apply</button>
     </div>
 
     <div class="job-card">
@@ -134,7 +134,7 @@
 
     <!-- Back to Home Button -->
     <div class="back-home">
-      <a href="home page.html">
+      <a href="homepage.php">
         <button>Back to Home</button>
       </a>
     </div>

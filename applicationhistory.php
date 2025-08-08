@@ -78,7 +78,7 @@
 
   <div class="header">
     <h1>Application History</h1>
-    <a href="JOB-SEEKER DASHBOARD.HTML" class="back-button">HOME</a>
+    <a href="jobseekerdashboard.php" class="back-button">HOME</a>
   </div>
 
   <div class="container">
