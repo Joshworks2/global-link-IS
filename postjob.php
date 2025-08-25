@@ -1,28 +1,30 @@
-
 <?php
 session_start();
 require 'db_connect.php';
 
 $user_id = $_SESSION['user_id']; // Logged in user ID
 
-// 1. First, find the employer ID linked to this user
+// 1. Get employer_id linked to this user
 $empQuery = $conn->prepare("SELECT id FROM employers WHERE user_id = ?");
 $empQuery->bind_param("i", $user_id);
 $empQuery->execute();
 $empResult = $empQuery->get_result();
 
-// 2. Now insert the job
+if ($empResult->num_rows > 0) {
+    $empRow = $empResult->fetch_assoc();
+    $employer_id = $empRow['id'];
+} else {
+    die("Employer profile not found.");
+}
+
+// 2. Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];
+    $description = $_POST['description']; // NEW field
     $requirements = $_POST['requirements'];
     $location = $_POST['location'];
 
     $stmt = $conn->prepare("INSERT INTO job_posts (employer_id, title, description, requirements, location) VALUES (?, ?, ?, ?, ?)");
-
-    if (!$stmt) {
-        die("Prepare failed: " . $conn->error);
-    }
-
     $stmt->bind_param("issss", $employer_id, $title, $description, $requirements, $location);
 
     if ($stmt->execute()) {
@@ -35,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -169,6 +172,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        <label>Location:
         <input type="text" name="location">
        </label>
+       
+       <label>Job Description:
+        <textarea name="description" required></textarea>
+       </label>
+
 
 
 

@@ -1,172 +1,158 @@
-<!DOCTYPE html> 
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Available Jobs</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f2f2f2;
-      color: #333;
-    }
+<?php
+   session_start();
+   echo "<pre>";
+   print_r($_SESSION);
+    echo "</pre>";
+   exit;
 
-    .header {
-      background-color: #333;
-      color: white;
-      padding: 30px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
+  require "db_connect.php"; // DB connection
 
-    .header .title {
-      font-size: 20px;
-      font-weight: bold;
-    }
+  // Only jobseekers can view this
+  if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "jobseeker") {
+      header("Location: login.php");
+      exit();
+  }
 
-    .header .header-buttons {
-      display: flex;
-      gap: 12px;
-    }
+  $user_id = $_SESSION["id"];
+  $message = "";
 
-    .header .header-buttons a {
-      text-decoration: none;
-    }
+  // Handle application submission
+  if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["job_id"])) {
+      $job_id = intval($_POST["job_id"]);
 
-    .header .header-buttons button {
-      background-color: #555;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-    }
+      // Check if already applied
+      $check = $conn->prepare("SELECT id FROM applications WHERE user_id=? AND job_id=?");
+      $check->bind_param("ii", $user_id, $job_id);
+      $check->execute();
+      $check->store_result();
 
-    .header .header-buttons button:hover {
-      background-color: #777;
-    }
+      if ($check->num_rows == 0) {
+          $stmt = $conn->prepare("INSERT INTO applications (user_id, job_id, status) VALUES (?, ?, 'pending')");
+          $stmt->bind_param("ii", $user_id, $job_id);
+          $stmt->execute();
+          $stmt->close();
+          $message = "✅ Application submitted successfully!";
+      } else {
+          $message = "⚠️ You already applied for this job.";
+      }
+      $check->close();
+  }
 
-    .job-card {
-      background-color: #e0e0e0;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      margin: 1.5rem auto;
-      max-width: 650px;
-    }
+  // Fetch jobs
+  $sql = "SELECT job_posts.id, job_posts.title, job_posts.description, job_posts.requirements, job_posts.location, employers.company_name
+          FROM job_posts
+          INNER JOIN employers ON job_posts.employer_id = employers.id
+          ORDER BY job_posts.posted_at DESC";
+  $result = $conn->query($sql);
+  $conn->close();
+  ?>
 
-    .job-card button {
-      background-color: #555;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
 
-    .job-card button:hover {
-      background-color: #333;
-    }
+  <?php
+  session_start();
+  require "db_connect.php"; // DB connection
 
-    .back-home {
-      text-align: center;
-      margin: 40px 0;
-    }
+  // ✅ Only jobseekers can view this page
+  if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "jobseeker") {
+      header("Location: login.php");
+      exit();
+  }
 
-    .back-home a button {
-      background-color: #333;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
+  // ✅ Ensure session user_id is set
+  if (!isset($_SESSION["id"])) {
+      header("Location: login.php");
+      exit();
+  }
 
-    .back-home a button:hover {
-      background-color: #555;
-    }
-  </style>
-</head>
-<body>
+  $user_id = $_SESSION["id"];
+  $message = "";
 
-  <div class="header">
-    <div class="title">GLOBAL-LINK</div>
-    <div class="header-buttons">
+  // ✅ Handle job application submission
+  if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["job_id"])) {
+      $job_id = intval($_POST["job_id"]);
+
+      // Check if already applied
+      $check = $conn->prepare("SELECT id FROM applications WHERE user_id=? AND job_id=?");
+      $check->bind_param("ii", $user_id, $job_id);
+      $check->execute();
+      $check->store_result();
+
+      if ($check->num_rows == 0) {
+          $stmt = $conn->prepare("INSERT INTO applications (user_id, job_id, status) VALUES (?, ?, 'pending')");
+          $stmt->bind_param("ii", $user_id, $job_id);
+          if ($stmt->execute()) {
+              $message = "✅ Application submitted successfully!";
+          } else {
+              $message = "⚠️ Error submitting application. Please try again.";
+          }
+          $stmt->close();
+      } else {
+          $message = "⚠️ You already applied for this job.";
+      }
+      $check->close();
+  }
+
+  // ✅ Fetch available jobs
+  $sql = "SELECT job_posts.id, job_posts.title, job_posts.description, job_posts.requirements, job_posts.location, employers.company_name
+          FROM job_posts
+          INNER JOIN employers ON job_posts.employer_id = employers.id
+          ORDER BY job_posts.posted_at DESC";
+  $result = $conn->query($sql);
+  ?>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Available Jobs</title>
+    <style>
+      body { margin:0; font-family:'Segoe UI',sans-serif; background:#f2f2f2; color:#333; }
+      .header { background:#333; color:white; padding:20px; display:flex; justify-content:space-between; align-items:center; }
+      .header .title { font-size:22px; font-weight:bold; }
+      .header a button { background:#555; color:white; border:none; padding:10px 16px; border-radius:6px; cursor:pointer; }
+      .job-card { background:#fff; border-radius:8px; padding:20px; margin:20px auto; max-width:700px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+      .job-card h3 { margin:0 0 10px; }
+      .job-card p { margin:5px 0; }
+      .job-card button { background:#333; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; }
+      .job-card button:hover { background:#555; }
+      .message { text-align:center; margin:15px; font-weight:bold; }
+      .success { color:green; }
+      .error { color:darkred; }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="title">GLOBAL-LINK</div>
       <a href="jobseekerdashboard.php"><button>HOME</button></a>
     </div>
-  </div>
 
-  <main style="padding: 2rem; min-height: 100vh;">
-    <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 2.5rem;">Available Jobs</h2>
+    <main style="padding:20px;">
+      <h2 style="text-align:center;">Available Jobs</h2>
 
-    <!-- Sample Job Cards -->
-    <div class="job-card">
-      <h3>🖥️ Front-End Web Developer</h3>
-      <p><strong>Skills:</strong> HTML, CSS, JavaScript</p>
-      <a href="apply.php"><button>Apply Now</button>
-    </div>
+      <?php if (!empty($message)): ?>
+        <p class="message <?= strpos($message,'✅')!==false ? 'success' : 'error' ?>">
+          <?= htmlspecialchars($message) ?>
+        </p>
+      <?php endif; ?>
 
-    <div class="job-card">
-      <h3>🎨 Graphic Designer Needed</h3>
-      <p><strong>Skills:</strong> Adobe Photoshop, Portfolio</p>
-      <a href="apply.php"><button>Apply Now</button>
-    </div>
+      <?php if ($result && $result->num_rows > 0): ?>
+        <?php while ($row = $result->fetch_assoc()): ?>
+          <div class="job-card">
+            <h3><?= htmlspecialchars($row["title"]) ?></h3>
+            <p><strong>Company:</strong> <?= htmlspecialchars($row["company_name"]) ?></p>
+            <p><strong>Location:</strong> <?= htmlspecialchars($row["location"]) ?></p>
+            <p><strong>Description:</strong> <?= nl2br(htmlspecialchars($row["description"])) ?></p>
+            <p><strong>Requirements:</strong> <?= nl2br(htmlspecialchars($row["requirements"])) ?></p>
+            <form method="POST" action="">
+              <input type="hidden" name="job_id" value="<?= $row['id'] ?>">
+              <button type="submit">Apply Now</button>
+            </form>
+          </div>
+        <?php endwhile; ?>
+      <?php else: ?>
+        <p style="text-align:center;">No jobs available at the moment.</p>
+      <?php endif; ?>
+    </main>
+  </body>
+  </html>
+  <?php $conn->close(); ?>
 
-    <div class="job-card">
-      <h3>📲 Mobile App Developer</h3>
-      <p><strong>Skills:</strong> Flutter, Firebase, UX Design</p>
-      <a href="apply.php"><button>Apply Now</button>
-    </div>
-
-    <div class="job-card">
-      <h3>📝 Content Writer</h3>
-      <p><strong>Skills:</strong> SEO, Copywriting, Research</p>
-      <a href="apply.php"><button>Apply Now</button>
-    </div>
-
-    <div class="job-card">
-      <h3>📷 Social Media Manager</h3>
-      <p><strong>Skills:</strong> Instagram, Analytics, Branding</p>
-      <a href="apply.php"><button>Apply Now</button>
-    </div>
-
-    <div class="job-card">
-      <h3>🎬 Video Editor</h3>
-      <p><strong>Skills:</strong> Premiere Pro, Timing, Visuals</p>
-      <a href="aplly.php"><button>Apply Now</button>
-    </div>
-
-    <div class="job-card">
-      <h3>📦 Logistics Coordinator</h3>
-      <p><strong>Skills:</strong> Inventory, Communication, Fast Typing</p>
-      <a href="apply.php"><button>Apply Now</button>
-    </div>
-
-    <div class="job-card">
-      <h3>👨‍💼 Virtual Assistant</h3>
-      <p><strong>Skills:</strong> Calendar Management, Email Handling</p>
-      <a href="apply.php"><button>Apply Now</button>
-    </div>
-
-    <div class="job-card">
-      <h3>🛒 E-commerce Product Uploader</h3>
-      <p><strong>Skills:</strong> Excel, Shopify, Basic Image Editing</p>
-      <a href="apply.php"><button>Apply Now</button>
-    </div>
-
-    <div class="job-card">
-      <h3>🔧 UI/UX Tester</h3>
-      <p><strong>Skills:</strong> Attention to Detail, Bug Reporting</p>
-      <a href="apply.php"><button>Apply Now</button>
-    </div>
-
-  </main>
-
-</body>
-</html>

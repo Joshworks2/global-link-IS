@@ -1,4 +1,10 @@
-<?php include 'db_connect.php'; ?>
+<?php 
+require "auth_check.php";
+requireRole("employer"); // only employers allowed
+include 'db_connect.php'; 
+// Get user name from session
+$full_name = $_SESSION["full_name"];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -124,13 +130,14 @@
       <h1 class="logo">GLOBAL-LINK</h1>
       <ul class="nav-links">
         <li><a href="homepage.php">Home</a></li>
-        <li><a href="login.php">Logout</a></li>
+        <li><a href="logout.php">logout</a>
+</li>
       </ul>
     </nav>
   </header>
 
   <main class="dashboard">
-    <h2>Welcome,</h2>
+    <h2>Welcome, <?php echo htmlspecialchars($full_name); ?>!</h2>
     <div class="dashboard-links">
       <a href="postjob.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/briefcase--v1.png" alt="Post Job">
@@ -138,7 +145,7 @@
       </a>
       <a href="applications.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/50/resume.png" class="icon" alt="View Applicants">
-        <h3>View Applicantions</h3>
+        <h3>View Applications</h3>
       </a>
       <a href="joblist.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/document.png" alt="Listings">

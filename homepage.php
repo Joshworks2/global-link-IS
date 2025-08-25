@@ -124,7 +124,6 @@
         <li><a href="login.php">Login</a></li>
         <li><a href="registeremployer.php">Employer Register</a></li>
         <li><a href="registerjobseeker.php">Job Seeker Register</a></li>
-        <li><a href="jobs.php">JOBS</a></li>
       </ul>
     </nav>
   </header>

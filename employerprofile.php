@@ -1,103 +1,80 @@
+<?php
+require "auth_check.php";
+requireRole("employer"); 
+include "db_connect.php";
+
+$user_id = $_SESSION["user_id"]; // must be stored at login
+
+// Fetch employer details
+$sql = "SELECT u.full_name, u.email, e.company_name, e.industry, e.location, e.profile_description
+        FROM users u
+        LEFT JOIN employers e ON u.id = e.user_id
+        WHERE u.id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$employer = $result->fetch_assoc();
+
+// Handle updates
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $full_name = $_POST["full_name"];
+    $email = $_POST["email"];
+    $company_name = $_POST["company_name"];
+    $industry = $_POST["industry"];
+    $location = $_POST["location"];
+    $profile_description = $_POST["profile_description"];
+
+    // Update users table
+    $stmt1 = $conn->prepare("UPDATE users SET full_name=?, email=? WHERE id=?");
+    $stmt1->bind_param("ssi", $full_name, $email, $user_id);
+    $stmt1->execute();
+
+    // Update employers table
+    $stmt2 = $conn->prepare("UPDATE employers 
+                             SET company_name=?, industry=?, location=?, profile_description=? 
+                             WHERE user_id=?");
+    $stmt2->bind_param("ssssi", $company_name, $industry, $location, $profile_description, $user_id);
+    $stmt2->execute();
+
+    header("Location: employerprofile.php?success=1");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Profile - Global-Link</title>
+  <title>Employer Profile - Global-Link</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f4f4;
-    }
-
+    body { margin: 0; font-family: Arial, sans-serif; background: #f4f4f4; }
     .navbar {
-      background: #333;
-      padding: 25px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background: #333; padding: 25px 40px; display: flex;
+      justify-content: space-between; align-items: center;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
-
-    .navbar .logo {
-      color: white;
-      font-size: 28px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav-links li {
-      margin-left: 30px;
-    }
-
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 18px;
-      padding: 8px 16px;
-      border-radius: 4px;
-      transition: background 0.3s;
-    }
-
-    .nav-links a:hover {
-      background: #555;
-    }
-
-    .main-content {
-      padding: 40px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-
+    .navbar .logo { color: white; font-size: 28px; font-weight: bold; }
+    .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
+    .nav-links li { margin-left: 30px; }
+    .nav-links a { color: white; text-decoration: none; font-size: 18px; }
+    .main-content { padding: 40px; display: flex; justify-content: center; }
     .profile-box {
-      background: white;
-      padding: 30px 50px;
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      max-width: 600px;
-      width: 100%;
-      text-align: center;
+      background: white; padding: 30px; border-radius: 12px; width: 100%; max-width: 600px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-
-    .profile-box p {
-      font-size: 17px;
-      margin: 12px 0;
+    .profile-box h3 { text-align: center; margin-bottom: 20px; }
+    label { display: block; margin-top: 12px; font-weight: bold; }
+    input, textarea {
+      width: 100%; padding: 10px; margin-top: 5px;
+      border: 1px solid #ccc; border-radius: 6px;
     }
-
-    .profile-box a button {
-      background: #333;
-      color: white;
-      border: none;
-      padding: 12px 28px;
-      margin-top: 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
+    button {
+      margin-top: 20px; width: 100%; padding: 12px;
+      background: #333; color: white; border: none; border-radius: 6px;
+      font-size: 16px; cursor: pointer;
     }
-
-    .profile-box a button:hover {
-      background: #555;
-    }
-
-    h3 {
-      color: #333;
-      text-align: center;
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
+    button:hover { background: #555; }
+    .success { color: green; text-align: center; }
   </style>
 </head>
 <body>
@@ -110,12 +87,33 @@
   </nav>
 
   <div class="main-content">
-    <h3>My Profile</h3>
     <div class="profile-box">
-      <p><strong>Name:</strong> Company Name</p>
-      <p><strong>Email:</strong> employer@example.com</p>
-      <p><strong>About:</strong> We are a leading company in the tech industry...</p>
-      <a href="profile.php"><button>Edit Profile</button></a>
+      <h3>My Profile</h3>
+      <?php if (isset($_GET["success"])): ?>
+        <p class="success">Profile updated successfully!</p>
+      <?php endif; ?>
+
+      <form method="POST">
+        <label>Full Name</label>
+        <input type="text" name="full_name" value="<?php echo htmlspecialchars($employer['full_name']); ?>">
+
+        <label>Email</label>
+        <input type="email" name="email" value="<?php echo htmlspecialchars($employer['email']); ?>">
+
+        <label>Company Name</label>
+        <input type="text" name="company_name" value="<?php echo htmlspecialchars($employer['company_name']); ?>">
+
+        <label>Industry</label>
+        <input type="text" name="industry" value="<?php echo htmlspecialchars($employer['industry']); ?>">
+
+        <label>Location</label>
+        <input type="text" name="location" value="<?php echo htmlspecialchars($employer['location']); ?>">
+
+        <label>About</label>
+        <textarea name="profile_description"><?php echo htmlspecialchars($employer['profile_description']); ?></textarea>
+
+        <button type="submit">Save Changes</button>
+      </form>
     </div>
   </div>
 

@@ -1,4 +1,10 @@
-<?php include 'db_connect.php'; ?>
+<?php 
+require "auth_check.php";
+requireRole("jobseeker"); // only job seekers allowed// 
+include 'db_connect.php';
+// Get user name from session
+$full_name = $_SESSION["full_name"];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -121,24 +127,23 @@
     <nav class="navbar">
       <h1 class="logo">GLOBAL-LINK</h1>
       <ul class="nav-links">
-        <li><a href="homepage.php">Home</a></li>
-        <li><a href="login.php">Logout</a></li>
+        <li><a href="logout.php">logout</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="dashboard">
-    <h2>Welcome!</h2>
+    <h2>Welcome, <?php echo htmlspecialchars($full_name); ?>!</h2>
     <div class="dashboard-links">
       <a href="applicationhistory.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/upload.png" alt="Upload">
         <h3>application History</h3>
       </a>
-      <a href="myjobs.php" class="dashboard-card">
+      <a href="jobs.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/suitcase.png" alt="Jobs">
         <h3>Browse Jobs</h3>
       </a>
-      <a href="myprofile.php" class="dashboard-card">
+      <a href="jobseekerprofile.php" class="dashboard-card">
         <img src="https://img.icons8.com/ios-filled/100/user.png" alt="Profile">
         <h3>Edit Profile</h3>
       </a>
@@ -146,7 +151,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 SkillsMatch. All rights reserved.</p>
+    <p>&copy; 2025 GLOBAL-LINK. All rights reserved.</p>
   </footer>
 </body>
 </html>
